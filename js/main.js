@@ -1,7 +1,6 @@
 
 let homePage = () =>{ 
 
-    // addLogo()
     let container = document.createElement('div');
     container.className = 'container';
     // 1. Logo
@@ -53,9 +52,6 @@ let homePage = () =>{
 // homePage()
 
 
-
-
-
 let createQuestion = document.querySelector("#btnCreate")
 let addQuestion = () =>{
     let container = document.createElement('div');
@@ -86,7 +82,7 @@ let addQuestion = () =>{
     title.appendChild(h1);
     titleQuestion.appendChild(question);
     // Select type of the question 
-    selectChoice()
+    createChoice()
     // Write your choice of the question
     writeAnswers()
     // get element to input answer and choose the correct answer
@@ -95,7 +91,7 @@ let addQuestion = () =>{
     choose.addEventListener('click',changOption);
     create.addEventListener('click', getQuestion)
 }
-let selectChoice = () =>{
+let createChoice = () =>{
     let container = document.querySelector('.container')
     // 2. Type of the questions 
         // create elements
@@ -117,6 +113,8 @@ let selectChoice = () =>{
     container.appendChild(select);
     
 }
+
+// Function to write the write the answer
 let writeAnswers = () =>{
     let container = document.querySelector('.container')
     let form = document.createElement('form');
@@ -156,7 +154,7 @@ let writeAnswers = () =>{
     container.appendChild(btnCreate);
 }
 
-// Change the type of the question when the user want 
+// Function to change the type of the question when the user want 
 function changOption(){
     let inputAnswer = document.querySelectorAll('.type-of-input');
     if (document.querySelector(".choice").value == 'checkbox'){
@@ -177,7 +175,9 @@ let getQuestion = () =>{
     let titleQuestion = document.querySelector('.add-question');
     let answers = document.querySelectorAll('.answer')
     let selects = document.getElementsByName('answer')
+    let choice = document.querySelector('.choice')
     let dataList = {}
+    dataList.type_of_question = choice.value
     for (let i = 0; i < answers.length; i++){
         if (answers[i].value){
             dataList['answer'+'_'+ (i+1)]= answers[i].value
@@ -207,6 +207,7 @@ let getQuestion = () =>{
     }else if(answers[0].value == "" || answers[1].value == ""|| answers[1].value == ""|| answers[3].value == ""){
         window.alert("You have to input your answer all places!")
     }
+    console.log(data)
 }
 let data = []
 // createQuestion.addEventListener('click', addQuestion)
