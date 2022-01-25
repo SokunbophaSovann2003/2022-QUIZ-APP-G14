@@ -8,7 +8,21 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container create-question">
+    <div class="container " id="home-page">
+        <div class="logo">
+            <img src="images/logo.png">
+        </div>
+        <h1 class="page-title">2022-QUEZ-APP-G14</h1>
+        <div class="group-btn">
+            <button id="btnQuiz" class="btn-click">QUIZ</button>
+            <button id="btnCreate"class="btn-click">CREATE</button>
+        </div>
+        <ul class="item-center">
+            <li>Click "CREATE" to create quiz that you want</li>
+            <li>Click "QUIZ" to start to do the exercise in this website</li>
+        </ul>
+    </div>
+    <div class="container " id="add-question-page">
         <div class="create-question">
             <div class="title"><button class="btn-back" id="btnBack">⇦</button>
                 <h1 class="title-create">CREATE QUESTION</h1>
@@ -17,8 +31,8 @@
         <form class="type-answer">
             <input class="add-question" type="text" placeholder="Add your question...">
             <select class="choice">
-                <option class="type-of-question" id="option1" value="radio">Option Answer</option>
-                <option class="type-of-question" id="option2" value="checkbox">Multiple Choice</option>
+                <option class="type-of-question" id="option1" value="radio">Multiple Choice</option>
+                <option class="type-of-question" id="option2" value="checkbox">Checkboxes</option>
             </select>
             <div class="input-answer">
                 <div class="input-group">

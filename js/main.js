@@ -1,66 +1,26 @@
 
-let homePage = () =>{ 
+// Call main class of any pages
+var home_page = document.querySelector("#home-page")
+var add_question_page = document.querySelector('#add-question-page')
 
-    let container = document.createElement('div');
-    container.className = 'container';
-    container.className = 'container_home';
-    // 1. Logo
-        // create element and class of elemen of logo
-    let logo = document.createElement('div');
-    logo.className = 'logo';
-    let img = document.createElement('img');
-        // To append element to the container and append container to body
-    document.body.appendChild(container);
-    container.appendChild(logo);
-    logo.appendChild(img);
-    img.src = 'images/logo.png';
-    // 2 Title of app
-    let h1 = document.createElement('h1');
-    h1.className = 'page-title';
-    h1.textContent = '2022-QUEZ-APP-G14';
-    container.appendChild(h1);
-    // 3. Button click to continue quiz and create quiz
-        // creat button and class
-    let groupBtn = document.createElement('div');
-    groupBtn.className = 'group-btn';
-    let btnQuiz = document.createElement('button');
-    btnQuiz.id = "btnQuiz";
-    btnQuiz.className = 'btn-click';
-    btnQuiz.textContent = 'QUIZ';
-    let btnCreate = document.createElement('button');
-    btnCreate.id = 'btnCreate';
-    btnCreate.className = 'btn-click';
-    btnCreate.textContent = 'CREATE';
-        // Append it to container
-    groupBtn.appendChild(btnQuiz);
-    groupBtn.appendChild(btnCreate);
-    container.appendChild(groupBtn);
-
-    // 3. Create element ul and li to descript about button
-        // create elemen
-    let ul = document.createElement('ul');
-    ul.className = 'item-center';
-    let li1 = document.createElement('li');
-    li1.textContent = 'Click "CREATE" to create quiz that you want';
-    let li2 = document.createElement('li');
-    li2.textContent= 'Click "QUIZ" to start to do the exercise in this website';
-        // append it to container
-    ul.appendChild(li1);
-    ul.appendChild(li2);
-    container.appendChild(ul);
-    console.log(container)
+// Call the button for click
+var btnCreateQuestion = document.querySelector("#btnCreate")
+var btnBack = document.querySelector("#btnBack")
+let addQuestion = () =>{
+    // Hide the page don't need
+    home_page.style.display = 'none'
+    // Show the page add question
+    add_question_page.style.display = 'block'
+    // get element to input answer and choose the correct answer and add to data
+    let choose = document.querySelector(".choice");
+    let create = document.querySelector('.create')
+    // Add the listener 
+    choose.addEventListener('click',changOption);
+    create.addEventListener('click', getQuestion)
+    btnBack.addEventListener('click', homePage)
 }
-// homePage()
 
-
-let createQuestion = document.querySelector("#btnCreate")
-// let addQuestion = () =>{
-//     let container = document.querySelector('.create-question');
-
-//     console.log(container)
-
-// }
-// Function to change the type of the question when the user want 
+// Function to change the type of the question(multiple choice or )
 function changOption(){
     let inputAnswer = document.querySelectorAll('.type-of-input');
     if (document.querySelector(".choice").value == 'checkbox'){
@@ -73,7 +33,6 @@ function changOption(){
         }
     }
 }
-
 // Get value from the input question====================
 let getQuestion = () =>{
     // To the call the class of the question and aswers
@@ -97,7 +56,6 @@ let getQuestion = () =>{
             corrected_answer += 1
         }
     }
-
     // Alert to tell user when the user don't complete all the condition 
     if (titleQuestion.value !== "" && answers[0].value !== "" && answers[1].value !== ""&& answers[1].value !== ""&& answers[3].value !== "" && choose_answer){
         dataList.title_question = titleQuestion.value
@@ -116,12 +74,15 @@ let getQuestion = () =>{
     }else{
         window.alert("Please choose the correct answer!")
     }
-    console.log(data)
 }
-let data = []
-// get element to input answer and choose the correct answer
-let choose = document.querySelector(".choice");
-let create = document.querySelector('.create')
-choose.addEventListener('click',changOption);
-create.addEventListener('click', getQuestion)
+function homePage(){
+    // To hide the pages that don't need
+    add_question_page.style.display = 'none'
+    btnCreateQuestion.addEventListener('click', addQuestion)
+    // Show the page that we need
+    home_page.style.display = "block"
+}
+homePage()
 
+// Variable to store data
+let data = []
