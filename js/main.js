@@ -56,7 +56,25 @@ let getQuestion = () =>{
             corrected_answer += 1
         }
     }
-    
+    // VALIDATION INPUT
+    // Alert to tell user when the user don't complete all the condition 
+    if (titleQuestion.value !== "" && answers[0].value !== "" && answers[1].value !== ""&& answers[1].value !== ""&& answers[3].value !== "" && choose_answer){
+        dataList.title_question = titleQuestion.value
+        data.push(dataList)
+        // reset the value to empty
+        titleQuestion.value = ""
+        for (input of answers){
+            input.value = ""
+        }
+        // To alert when user don't create the question and click start
+    }else if (titleQuestion.value == ""){
+        window.alert("Please input your question!")
+        // To alert when user don't input the answers and click start
+    }else if(answers[0].value == "" || answers[1].value == ""|| answers[1].value == ""|| answers[3].value == ""){
+        window.alert("You have to input your answer all places!")
+    }else{
+        window.alert("Please choose the correct answer!")
+    }
 }
 function homePage(){
     // To hide the pages that don't need
