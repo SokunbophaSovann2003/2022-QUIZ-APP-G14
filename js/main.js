@@ -56,7 +56,7 @@ let getQuestion = () =>{
             corrected_answer += 1
         }
     }
-    // VALIDATION INPUT
+    // validation input
     // Alert to tell user when the user don't complete all the condition 
     if (titleQuestion.value !== "" && answers[0].value !== "" && answers[1].value !== ""&& answers[1].value !== ""&& answers[3].value !== "" && choose_answer){
         dataList.title_question = titleQuestion.value
