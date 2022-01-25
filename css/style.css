@@ -136,3 +136,71 @@ li{
     cursor: pointer;
     border-radius: 2px;
 }
+
+
+
+
+/* show answers=============================== */
+.show-task{
+    border: 1px solid rgb(199, 199, 199);
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    margin: 20px 70px;
+    /* padding: 15px; */
+}
+.show-question{
+    background-color: #0D08F8;
+    color: white;
+    font-size: 22px;
+    padding: 20px;
+}
+.contain-answer{
+    display: flex;
+    align-items: center;
+    /* padding: 0px 20px; */
+    margin: -10px 20px;
+    font-size: 20px;
+}
+
+.contain-answer li{
+    /* background-color: aqua; */
+    list-style-type: circle;
+    font-size: 40px;
+    width: 30px;
+}
+/* .contain-answer .checkbox{
+    background-color: aqua;
+    list-style-type: square;
+    color: #7775e7;
+    font-size: 40px;
+    width: 30px;
+} */
+.contain-answer .correct{
+    list-style-type: disc;
+    color: #0D08F8;
+    font-size: 40px;
+    width: 30px;
+}
+.button-group{
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    padding: 20px 35px;
+    text-align: right;
+}
+.button-edit{
+    padding: 7px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #0D08F8;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    margin: 0 10px;
+}
+.button-delete{
+    padding: 7px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    background-color: rgb(221, 0, 0);
+}

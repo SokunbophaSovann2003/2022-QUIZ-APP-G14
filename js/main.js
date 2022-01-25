@@ -18,6 +18,7 @@ let addQuestion = () =>{
     choose.addEventListener('click',changOption);
     create.addEventListener('click', getQuestion)
     btnBack.addEventListener('click', homePage)
+    // showTask()
 }
 
 // Function to change the type of the question(multiple choice or )
@@ -51,7 +52,7 @@ let getQuestion = () =>{
     let choose_answer = false
     for (let i = 0; i < selects.length; i++){
         if (selects[i].checked){
-            dataList['crection'+"_" + corrected_answer] = answers[i].value
+            dataList[corrected_answer] = i;
             choose_answer = true
             corrected_answer += 1
         }
@@ -75,6 +76,7 @@ let getQuestion = () =>{
     }else{
         window.alert("Please choose the correct answer!")
     }
+    showTask();
 }
 function homePage(){
     // To hide the pages that don't need
@@ -87,3 +89,90 @@ homePage()
 
 // Variable to store data
 let data = []
+
+
+
+
+// show the task that user create
+function showTask(){
+    // Create element to contain the show task
+    let removeObj = document.querySelector('#add-question-page');
+    let ObjToRemove = document.getElementsByClassName('show-task');
+    let comp = ObjToRemove.length;
+    let comNum = 0;
+    // Check to remove the previous answers
+    if (data.length>=0){
+        while(comNum<comp){
+            removeObj.removeChild(ObjToRemove[0]);
+            comNum += 1;
+            console.log(comNum);
+        }
+    }
+
+    // Check to Create all the value from data
+    for (Index=0; Index<data.length; Index++){
+        // create to contain all the element of showing the task user created
+        let show_task = document.createElement('div');
+        show_task.className='show-task';
+
+        // create to add the question
+        let show_question = document.createElement('div');
+        show_question.className='show-question';
+        show_question.textContent=data[Index]["title_question"];
+        show_task.appendChild(show_question);
+        
+
+        // check to create and add the answer
+        for (i=0; i<4; i++){
+            let contain_answer = document.createElement('div');
+            contain_answer.className='contain-answer';
+    
+            let answer_type = document.createElement('li');
+            // if (data[Index]['type_of_question']=='radio'){     
+            //     answer_type.className='radio';
+            // } else{
+            //     answer_type.className='checkbox'
+            // }
+            
+            
+            let answer_value = document.createElement('p');
+            answer_value.className='answer-value';
+            answer_value.textContent=data[Index]['answer'+'_' + (i+1)];
+
+            // check to find the correct answers
+            for (index=0; index<5; index++){
+                if (i==data[Index][index]){
+                    answer_type.className = 'correct';
+                }
+            }
+            contain_answer.appendChild(answer_type);
+            contain_answer.appendChild(answer_value);
+            show_task.appendChild(contain_answer);
+        }
+
+        // create to contain the button delete and button edit
+        let button_group = document.createElement('div');
+        button_group.className='button-group';
+        
+        // create for button edit
+        let button_edit = document.createElement('button');
+        button_edit.className='button-edit';
+        button_edit.type='button';
+        button_edit.textContent='Edit';
+        button_group.appendChild(button_edit);
+
+        // create for button delet
+        let button_delete = document.createElement('button');
+        button_delete.className='button-delete';
+        button_delete.type='button';
+        button_delete.textContent='Delete';
+        button_group.appendChild(button_delete);
+        show_task.appendChild(button_group);
+    
+        document.querySelector('#add-question-page').appendChild(show_task);
+        console.log(data);
+        console.log(document.querySelector('#add-question-page'));
+    }
+}
+
+
