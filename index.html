@@ -8,6 +8,43 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div class="container create-question">
+        <div class="create-question">
+            <div class="title"><button class="btn-back" id="btnBack">⇦</button>
+                <h1 class="title-create">CREATE QUESTION</h1>
+            </div>
+        </div>
+        <form class="type-answer">
+            <input class="add-question" type="text" placeholder="Add your question...">
+            <select class="choice">
+                <option class="type-of-question" id="option1" value="radio">Option Answer</option>
+                <option class="type-of-question" id="option2" value="checkbox">Multiple Choice</option>
+            </select>
+            <div class="input-answer">
+                <div class="input-group">
+                    <input type="radio" name="answer" class="type-of-input">
+                    <input type="text"class="answer" placeholder="answer1">
+                </div>
+                <br>
+                <div class="input-group">
+                    <input type="radio" name="answer" class="type-of-input">
+                    <input type="text"class="answer" placeholder="answer1">
+                </div>
+                <br>
+                <div class="input-group">
+                    <input type="radio" name="answer" class="type-of-input">
+                    <input type="text"class="answer" placeholder="answer1">
+                </div>
+                <br>
+                <div class="input-group">
+                    <input type="radio" name="answer" class="type-of-input">
+                    <input type="text"class="answer" placeholder="answer1">
+                </div>
+                <br>
+            </div>
+            <span class="create" id="create">CREATE</span>
+        </form>
+    </div>
     <script src="js/main.js"></script>
 </body>
 </html>
