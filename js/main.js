@@ -57,6 +57,7 @@ let getQuestion = () =>{
             dataList[corrected_answer] = i;
             choose_answer = true
             corrected_answer += 1
+            selects[i].checked=false
         }
     }
     // validation input=========================================================================
@@ -100,6 +101,7 @@ function addDataToLocalStorage(){
     if (data.length >0){
         localStorage.setItem('data'+localStorage.length, data_dictionary)
         data = []
+        location.reload();
     }else{
         window.alert("Please Ceate Your Quiz")
     }
@@ -162,12 +164,14 @@ function showTask(){
         // create to contain the button delete and button edit
         let button_group = document.createElement('div');
         button_group.className='button-group';
+        button_group.id=Index;
         
         // create for button edit
         let button_edit = document.createElement('button');
         button_edit.className='button-edit';
         button_edit.type='button';
         button_edit.textContent='Edit';
+        button_edit.addEventListener('click', editeTask);
         button_group.appendChild(button_edit);
 
         // create for button delet
@@ -177,6 +181,49 @@ function showTask(){
         button_delete.textContent='Delete';
         button_group.appendChild(button_delete);
         show_task.appendChild(button_group);
+        button_delete.addEventListener('click', deleteTask);
         document.querySelector('#add-question-page').appendChild(show_task);
     }
+}
+
+// delete the task when user click on button delete
+function deleteTask(event){
+    let pare = event.target;
+    let deleteTask = pare.parentNode.id;
+    // console.log(deleteTask);
+    data.splice(deleteTask, 1);
+    showTask();
+}
+
+// Edite task when user click on button Edite
+function editeTask(event){
+    let editQuestion = document.querySelector('.add-question');
+    let editAnswers = document.querySelectorAll('.answer')
+    // let selects = document.getElementsByName('answer')
+    // let choice = document.querySelector('.choice')
+    if (editQuestion.value == "" && editAnswers[0].value == "" && editAnswers[1].value == ""&& editAnswers[1].value == ""&& editAnswers[3].value == ""){
+        let edits = event.target.parentNode.id;
+        let dataTask = data[edits];
+        deleteTask(event);
+    
+        let editeQuestion = document.querySelector('.add-question');
+        editeQuestion.value= dataTask['title_question'];
+        for (i=0; i<4; i++){
+            // for display the same answers that user want to edit
+            let answerEdit = document.getElementsByClassName('answer')[i];
+            answerEdit.value=dataTask['answer_'+(i+1)];
+            
+            // check for the correct answer that user had been check
+            let check_answer_edit = document.getElementsByClassName('type-of-input');
+            for (index=1; index<5; index++){
+                if (i==dataTask[index]){
+                    check_answer_edit[i].checked=true;
+                }
+            }
+            
+        }
+    }else{
+        window.alert('You need to make you create task Empty First')
+    }
+
 }
