@@ -7,7 +7,7 @@ var add_question_page = document.querySelector('#add-question-page')
 var btnCreateQuestion = document.querySelector("#btnCreate")
 var btnBack = document.querySelector("#btnBack")
 let addQuestion = () =>{
-    // Hide the page don't need
+    // Hide the page don't need(home page)
     home_page.style.display = 'none'
     // Show the page add question
     add_question_page.style.display = 'block'
@@ -21,7 +21,7 @@ let addQuestion = () =>{
     // showTask()
 }
 
-// Function to change the type of the question(multiple choice or )
+// Function to change the type of the question(multiple choice or )===========================================
 function changOption(){
     let inputAnswer = document.querySelectorAll('.type-of-input');
     if (document.querySelector(".choice").value == 'checkbox'){
@@ -34,18 +34,20 @@ function changOption(){
         }
     }
 }
-// Get value from the input question====================
+
+
+// Get value from the input question=======================================================================
 let getQuestion = () =>{
     // To the call the class of the question and aswers
     let titleQuestion = document.querySelector('.add-question');
     let answers = document.querySelectorAll('.answer')
     let selects = document.getElementsByName('answer')
     let choice = document.querySelector('.choice')
-    let dataList = {}
+    var dataList = {}
     dataList.type_of_question = choice.value
     for (let i = 0; i < answers.length; i++){
         if (answers[i].value){
-            dataList['answer'+'_'+ (i+1)]= answers[i].value
+            dataList['answer_'+ (i+1)]= answers[i].value
         }
     }
     let corrected_answer = 1
@@ -57,7 +59,7 @@ let getQuestion = () =>{
             corrected_answer += 1
         }
     }
-    // validation input
+    // validation input=========================================================================
     // Alert to tell user when the user don't complete all the condition 
     if (titleQuestion.value !== "" && answers[0].value !== "" && answers[1].value !== ""&& answers[1].value !== ""&& answers[3].value !== "" && choose_answer){
         dataList.title_question = titleQuestion.value
@@ -77,6 +79,7 @@ let getQuestion = () =>{
         window.alert("Please choose the correct answer!")
     }
     showTask();
+    console.log(data)
 }
 function homePage(){
     // To hide the pages that don't need
@@ -90,9 +93,18 @@ homePage()
 // Variable to store data
 let data = []
 
-
-
-
+// To add data to local storage
+let saveData = document.querySelector(".btn-save")
+function addDataToLocalStorage(){
+    let data_dictionary = JSON.stringify(data)
+    if (data.length >0){
+        localStorage.setItem('data'+localStorage.length, data_dictionary)
+        data = []
+    }else{
+        window.alert("Please Ceate Your Quiz")
+    }
+}
+saveData.addEventListener('click', addDataToLocalStorage)
 // show the task that user create
 function showTask(){
     // Create element to contain the show task
@@ -105,10 +117,8 @@ function showTask(){
         while(comNum<comp){
             removeObj.removeChild(ObjToRemove[0]);
             comNum += 1;
-            console.log(comNum);
         }
     }
-
     // Check to Create all the value from data
     for (Index=0; Index<data.length; Index++){
         // create to contain all the element of showing the task user created
@@ -133,7 +143,6 @@ function showTask(){
             // } else{
             //     answer_type.className='checkbox'
             // }
-            
             
             let answer_value = document.createElement('p');
             answer_value.className='answer-value';
@@ -168,11 +177,6 @@ function showTask(){
         button_delete.textContent='Delete';
         button_group.appendChild(button_delete);
         show_task.appendChild(button_group);
-    
         document.querySelector('#add-question-page').appendChild(show_task);
-        console.log(data);
-        console.log(document.querySelector('#add-question-page'));
     }
 }
-
-

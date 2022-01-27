@@ -47,18 +47,23 @@ li{
     margin-bottom: 10px;
 }
 
-/* Add question */
-
+/* Add question ==========================================================================*/
+.create-question{
+    position: sticky;
+    top: -20px;
+    z-index: 99999;
+}
 .title{
     background-color:#0D08F8;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
 }
+
 .btn-back{
     font-size: 40px;
     border: none;
     background: none;
     color: white;
-    margin-left: 60px;
+    margin-left: 20px;
 }
 .btn-back:hover{
     cursor: pointer;
@@ -130,13 +135,31 @@ li{
     margin-top: 15px;
 }
 .create{
+    color: white;
     background-color:#2F2BF8 ;
     padding: 10px 20px;
-    margin-left: 25px;
+    margin-left: 72px;
     cursor: pointer;
     border-radius: 2px;
 }
+.create:hover{
+    color: #C4C4C4;
+}
+.btn-save{
+    position: absolute;
+    right: 70px;
+    color: white;
+    top: 10px;
+    font-size: 20px;
+    background-color: #C4C4C4 ;
+    padding: 5px 20px;
+    margin-left: 25px;
+    cursor: pointer;
+    border-radius: 2px;
 
+}.btn-save:hover{
+    color: green;
+}
 
 
 
@@ -144,7 +167,7 @@ li{
 .show-task{
     border: 1px solid rgb(199, 199, 199);
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-    margin: 20px 70px;
+    margin: 20px 72px
     /* padding: 15px; */
 }
 .show-question{
