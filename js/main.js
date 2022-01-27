@@ -227,3 +227,156 @@ function editeTask(event){
     }
 
 }
+
+// ===========================Dispay Quiz========================VeangLy code---
+// ------------------Data structure storage--------------------------------------
+let dat_test= [
+    {1: 1, 2: 3,
+    an: "I lvoe cambodia1111.",
+    answer_1:"Love", answer_2: "Hate", 
+    answer_3: "Fall in", answer_4: "Want date",
+     title_question: "What do you mean?"
+   },
+    {   1: 0, 2: 2, 3:3,
+        title_question: "What do you like?",
+        answer_1: "apple",
+        answer_2: "ice cream",
+        answer_3: "orange",
+        answer_4: "mango",
+    },
+    {   1:3,
+        title_question: "Where do Bopha live?",
+        answer_1: "BTB",
+        answer_2: "RTK",
+        answer_3: "KPC",
+        answer_4: "BMC",
+    },
+    {   1:0,
+        title_question: "Who is Key crush Today?",
+        answer_1: "Liza",
+        answer_2: "Pisey",
+        answer_3: "Yu Ry",
+        answer_4: "Raby",
+        corrected: "Liza",
+    },
+    {   1:2,
+        title_question: "What ...... you do for him?",
+        answer_1: "Would",
+        answer_2: "Will",
+        answer_3: "Will be",
+        answer_4: "Would be",
+        
+    },
+    {   1:0,
+        title_question: "He've......(be) to Cambodia about three time.",
+        answer_1: "been",
+        answer_2: "being",
+        answer_3: "had been",
+        answer_4: "have been",
+    },
+    {   1:3,
+        title_question: "I live ...........Cambodia.",
+        answer_1: "at",
+        answer_2: "on",
+        answer_3: "in",
+        answer_4: "of",
+    },
+    {   1:0,
+        title_question: "Ronal do is the ..... footbaler in the world.",
+        answer_1: "best",
+        answer_2: "good",
+        answer_3: "Well",
+        answer_4: "Exerlenct",
+    },
+    {   1:3,
+        title_question: "Car is ......... than bike.",
+        answer_1: "fastest",
+        answer_2: "fastest than",
+        answer_3: "faster than",
+        answer_4: "faster",
+    },
+    {   1:1,
+        title_question: "What does IP stand for?",
+        answer_1: "Internet Parking",
+        answer_2: "Internet Protocol",
+        answer_3: "Internet Price",
+        answer_4: "Internet Push",
+    },
+    {   1:3,
+        title_question: "Where is the Ankor Wat tample?",
+        answer_1: "Prey Veng",
+        answer_2: "Kep",
+        answer_3: "Siem Reap",
+        answer_4: "Koh Kong",
+    }
+];
+//------------------------------Create The template------------------------------
+let global_Index = 0;
+let total_Score = 0;
+let number_Of_Click = 0;
+document.querySelector("#move")
+function create_Quiz(parater) {   // Create the quiz by data structur to html...
+    if(global_Index < parater.length){       
+        let start = parater[global_Index];
+        document.getElementById("question_Add").textContent = start.title_question;
+        document.getElementById("btn-1").textContent = start.answer_1;
+        document.getElementById("btn-2").textContent = start.answer_2;
+        document.getElementById("btn-3").textContent = start.answer_3;
+        document.getElementById("btn-4").textContent = start.answer_4;
+        document.getElementById("question_Number").textContent = global_Index+1 + "/"+ parater.length;
+
+        if(global_Index == 0){
+        let div = document.createElement("div");     //Create button move question...
+        div.className="btn_Move";
+        document.body.appendChild(div);
+        let move_btn=document.createElement("button");
+        move_btn.id="move";
+        move_btn.className="blue";
+        move_btn.textContent="Next >";
+        div.appendChild(move_btn);                    // Move the question
+        document.getElementById("move").onclick = function (){create_Quiz(dat_test)}
+        }
+        document.querySelector("#move").style.background="";
+    }
+    global_Index += 1;
+    number_Of_Click = global_Index;
+}
+// -----------Create button Click---------------------------------------
+let button_Click = document.getElementsByClassName("btn"); // Get button for click...
+for(let click of button_Click){click.addEventListener("click",getClick);}
+function getClick(event) {   // Click function...........
+    let start = dat_test[global_Index-1];
+    let targets = event.target;
+    for(let i = 0;i<button_Click.length;i++){
+        if(targets.textContent == button_Click[i].textContent){
+            if(i==start[1]){
+                total_Score += 30;
+            }else if(i==start[2]){
+                total_Score += 30;
+            }else if(i==start[3]){
+                total_Score += 30;
+            }
+        }
+    }
+    document.querySelector("#move").style.background="blue";
+}
+function start_Quiz() {
+    document.getElementsByClassName("btn_Start")[0].style.display = "none";
+    document.getElementsByClassName("quiz_Container")[0].style.display = "block";
+    create_Quiz(dat_test);
+}
+function get_Into_Quiz(){
+    document.getElementsByClassName("container")[0].style.display="none";
+    let div = document.createElement("div");
+    div.className="btn_Start";
+    document.body.appendChild(div);
+    let start_btn=document.createElement("button");
+    start_btn.id="start";
+    start_btn.textContent="START >";
+    div.appendChild(start_btn);
+    document.getElementById("start").style.display="block";
+    document.getElementById("start").onclick = function (){start_Quiz()} //<!--Get start------->
+}
+// -----------Group Button Click-----------------------------------
+var btn_get_Quiz= document.getElementById("btnQuiz");    //Get into the Quiz....
+btn_get_Quiz.addEventListener("click",get_Into_Quiz)
