@@ -97,16 +97,33 @@ let data = []
 // To add data to local storage
 let saveData = document.querySelector(".btn-save")
 function addDataToLocalStorage(){
-    let data_dictionary = JSON.stringify(data)
-    if (data.length >0){
+    let quizTitle = document.querySelector(".quiz-title").value
+    if (data.length >0 && quizTitle !== "") {
+        let title_quiz = {}
+        title_quiz["title_quiz"] = quizTitle
+        data.push(title_quiz)
+        let data_dictionary = JSON.stringify(data)
         localStorage.setItem('data'+localStorage.length, data_dictionary)
         data = []
         location.reload();
+    }else if(quizTitle == ""){
+        window.alert("Please put your title of your quiz")
     }else{
         window.alert("Please Ceate Your Quiz")
     }
 }
 saveData.addEventListener('click', addDataToLocalStorage)
+
+// ========================Function for random question================================
+function shuffle(array) {
+    for (let i = array.length-2; i > 0; i--) {
+      let index = Math.floor(Math.random() * (i + 1));
+      let temp = array[i];
+      array[i] = array[index];
+      array[index] = temp;
+    }
+    return array;
+  }
 // show the task that user create
 function showTask(){
     // Create element to contain the show task
@@ -165,7 +182,6 @@ function showTask(){
         let button_group = document.createElement('div');
         button_group.className='button-group';
         button_group.id=Index;
-        
         // create for button edit
         let button_edit = document.createElement('button');
         button_edit.className='button-edit';
@@ -205,7 +221,7 @@ function editeTask(event){
         let edits = event.target.parentNode.id;
         let dataTask = data[edits];
         deleteTask(event);
-    
+
         let editeQuestion = document.querySelector('.add-question');
         editeQuestion.value= dataTask['title_question'];
         for (i=0; i<4; i++){
@@ -225,7 +241,6 @@ function editeTask(event){
     }else{
         window.alert('You need to make you create task Empty First')
     }
-
 }
 
 // ===========================Dispay Quiz========================VeangLy code---
@@ -308,22 +323,25 @@ let dat_test= [
         answer_2: "Kep",
         answer_3: "Siem Reap",
         answer_4: "Koh Kong",
-    }
+    },
+    {title_quiz: "General knowledge"}
 ];
+
+let randomQuiz = shuffle(dat_test)
 //------------------------------Create The template------------------------------
 let global_Index = 0;
 let total_Score = 0;
 let number_Of_Click = 0;
 document.querySelector("#move")
 function create_Quiz(parater) {   // Create the quiz by data structur to html...
-    if(global_Index < parater.length){       
+    if(global_Index < parater.length-1){       
         let start = parater[global_Index];
         document.getElementById("question_Add").textContent = start.title_question;
         document.getElementById("btn-1").textContent = start.answer_1;
         document.getElementById("btn-2").textContent = start.answer_2;
         document.getElementById("btn-3").textContent = start.answer_3;
         document.getElementById("btn-4").textContent = start.answer_4;
-        document.getElementById("question_Number").textContent = global_Index+1 + "/"+ parater.length;
+        document.getElementById("question_Number").textContent = global_Index+1 + "/"+ (parater.length-1);
 
         if(global_Index == 0){
         let div = document.createElement("div");     //Create button move question...
@@ -334,7 +352,7 @@ function create_Quiz(parater) {   // Create the quiz by data structur to html...
         move_btn.className="blue";
         move_btn.textContent="Next >";
         div.appendChild(move_btn);                    // Move the question
-        document.getElementById("move").onclick = function (){create_Quiz(dat_test)}
+        document.getElementById("move").onclick = function (){create_Quiz(randomQuiz)}
         }
         document.querySelector("#move").style.background="";
     }

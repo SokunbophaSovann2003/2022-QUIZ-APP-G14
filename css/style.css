@@ -54,6 +54,9 @@ li{
     z-index: 99999;
 }
 .title{
+    
+    display: flex;
+    justify-content: space-between;
     background-color:#0D08F8;
     padding-bottom: 5px;
 }
@@ -69,12 +72,12 @@ li{
     cursor: pointer;
     color: black;
 }
-.title-create{
-    margin-top: 0;
-    display: flex;
-    justify-content: center;
-    color: white;
-    font-size: 40px;
+.quiz-title{
+    padding: 5px;
+    border-radius: 5px;
+    margin: auto;
+    background-color: #C4C4C4;
+    font-size: 20px;
 }
 
 
@@ -88,6 +91,7 @@ li{
     box-sizing: border-box;
 }
 ::placeholder{
+    color: rgb(228, 72, 72);
     font-size: 20px;
 }
 
