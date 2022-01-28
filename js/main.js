@@ -97,17 +97,25 @@ let data = []
 // To add data to local storage
 let saveData = document.querySelector(".btn-save")
 function addDataToLocalStorage(){
-    let data_dictionary = JSON.stringify(data)
-    if (data.length >0){
+    let quizTitle = document.querySelector(".quiz-title")
+    if (data.length >0 && quizTitle.value !== "") {
+        let title_quiz = {}
+        title_quiz["title_quiz"] = quizTitle.value
+        data.push(title_quiz)
+        let data_dictionary = JSON.stringify(data)
         localStorage.setItem('data'+localStorage.length, data_dictionary)
         data = []
         location.reload();
+    }else if(quizTitle == ""){
+        window.alert("Please put your title of your quiz")
     }else{
         window.alert("Please Ceate Your Quiz")
     }
 }
 saveData.addEventListener('click', addDataToLocalStorage)
-// show the task that user create
+
+
+// show the task that user create=========================
 function showTask(){
     // Create element to contain the show task
     let removeObj = document.querySelector('#add-question-page');
@@ -332,9 +340,9 @@ function create_Quiz(parater) {   // Create the quiz by data structur to html...
         let move_btn=document.createElement("button");
         move_btn.id="move";
         move_btn.className="blue";
-        move_btn.textContent="Next >";
+        move_btn.textContent="Next>";
         div.appendChild(move_btn);                    // Move the question
-        document.getElementById("move").onclick = function (){create_Quiz(dat_test)}
+        document.getElementById("move").onclick = function (){create_Quiz()}
         }
         document.querySelector("#move").style.background="";
     }
