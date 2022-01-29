@@ -248,159 +248,309 @@ function editeTask(event){
 
 // ===========================Dispay Quiz========================VeangLy code---
 // ------------------Data structure storage--------------------------------------
-// let dat_test= [
-//     {1: 1, 2: 3,
-//     an: "I lvoe cambodia1111.",
-//     answer_1:"Love", answer_2: "Hate", 
-//     answer_3: "Fall in", answer_4: "Want date",
-//      title_question: "What do you mean?"
-//    },
-//     {   1: 0, 2: 2, 3:3,
-//         title_question: "What do you like?",
-//         answer_1: "apple",
-//         answer_2: "ice cream",
-//         answer_3: "orange",
-//         answer_4: "mango",
-//     },
-//     {   1:3,
-//         title_question: "Where do Bopha live?",
-//         answer_1: "BTB",
-//         answer_2: "RTK",
-//         answer_3: "KPC",
-//         answer_4: "BMC",
-//     },
-//     {   1:0,
-//         title_question: "Who is Key crush Today?",
-//         answer_1: "Liza",
-//         answer_2: "Pisey",
-//         answer_3: "Yu Ry",
-//         answer_4: "Raby",
-//         corrected: "Liza",
-//     },
-//     {   1:2,
-//         title_question: "What ...... you do for him?",
-//         answer_1: "Would",
-//         answer_2: "Will",
-//         answer_3: "Will be",
-//         answer_4: "Would be",
-        
-//     },
-//     {   1:0,
-//         title_question: "He've......(be) to Cambodia about three time.",
-//         answer_1: "been",
-//         answer_2: "being",
-//         answer_3: "had been",
-//         answer_4: "have been",
-//     },
-//     {   1:3,
-//         title_question: "I live ...........Cambodia.",
-//         answer_1: "at",
-//         answer_2: "on",
-//         answer_3: "in",
-//         answer_4: "of",
-//     },
-//     {   1:0,
-//         title_question: "Ronal do is the ..... footbaler in the world.",
-//         answer_1: "best",
-//         answer_2: "good",
-//         answer_3: "Well",
-//         answer_4: "Exerlenct",
-//     },
-//     {   1:3,
-//         title_question: "Car is ......... than bike.",
-//         answer_1: "fastest",
-//         answer_2: "fastest than",
-//         answer_3: "faster than",
-//         answer_4: "faster",
-//     },
-//     {   1:1,
-//         title_question: "What does IP stand for?",
-//         answer_1: "Internet Parking",
-//         answer_2: "Internet Protocol",
-//         answer_3: "Internet Price",
-//         answer_4: "Internet Push",
-//     },
-//     {   1:3,
-//         title_question: "Where is the Ankor Wat tample?",
-//         answer_1: "Prey Veng",
-//         answer_2: "Kep",
-//         answer_3: "Siem Reap",
-//         answer_4: "Koh Kong",
-//     },
-//     {title_quiz: "General knowledge"}
-// ];
-
-let randomQuiz = shuffle(dat_test)
-//------------------------------Create The template------------------------------
-let global_Index = 0;
-let total_Score = 0;
-let number_Of_Click = 0;
-document.querySelector("#move")
-function create_Quiz(parater) {   // Create the quiz by data structur to html...
-    if(global_Index < parater.length-1){       
-        let start = parater[global_Index];
-        document.getElementById("question_Add").textContent = start.title_question;
-        document.getElementById("btn-1").textContent = start.answer_1;
-        document.getElementById("btn-2").textContent = start.answer_2;
-        document.getElementById("btn-3").textContent = start.answer_3;
-        document.getElementById("btn-4").textContent = start.answer_4;
-        document.getElementById("question_Number").textContent = global_Index+1 + "/"+ (parater.length-1);
-
-        if(global_Index == 0){
-        let div = document.createElement("div");     //Create button move question...
-        div.className="btn_Move";
-        document.body.appendChild(div);
-        let move_btn=document.createElement("button");
-        move_btn.id="move";
-        move_btn.className="blue";
-        move_btn.textContent="Next >";
-        div.appendChild(move_btn);                    // Move the question
-        document.getElementById("move").onclick = function (){create_Quiz(randomQuiz)}
-        }
-        document.querySelector("#move").style.background="";
+let dat_test= [
+    {1: 1, 2: 3, 
+    answer_1:"Love", 
+    answer_2: "Hate",
+    answer_3: "Fall in",
+    answer_4: "Want date",
+    title_question: "What do you mean?",
+    type_of_question: "checkbox"
+   },
+    {   1:3,
+        title_question: "Where do Bopha live?",
+        answer_1: "BTB",
+        answer_2: "RTK",
+        answer_3: "KPC",
+        answer_4: "BMC",
+        type_of_question: "radio"
+    },
+    {   1:0, 2:1,3:3,
+        title_question: "Who is Key crush Today?",
+        answer_1: "Liza",
+        answer_2: "Pisey",
+        answer_3: "Yu Ry",
+        answer_4: "Raby",
+        type_of_question: "checkbox"
+    },
+    {   1:1,
+        title_question: "What ...... you do for him?",
+        answer_1: "Would",
+        answer_2: "Will",
+        answer_3: "Will be",
+        answer_4: "Would be",
+        type_of_question: "radio"
+    },
+    {   1:0,
+        title_question: "He've......(be) to Cambodia about three time.",
+        answer_1: "been",
+        answer_2: "being",
+        answer_3: "had been",
+        answer_4: "have been",
+        type_of_question: "radio"
+    },
+    {   1:2,
+        title_question: "I live ...........Cambodia.",
+        answer_1: "at",
+        answer_2: "on",
+        answer_3: "in",
+        answer_4: "of",
+        type_of_question: "radio"
+    },
+    {   1:0,
+        title_question: "Ronal do is the ..... footbaler in the world.",
+        answer_1: "best",
+        answer_2: "good",
+        answer_3: "Well",
+        answer_4: "Exerlenct",
+        type_of_question: "radio"
+    },
+    {   1:0, 2:1, 3: 3,
+        title_question: "which word are the same meaning of the word ,mabybe?",
+        answer_1: "approx",
+        answer_2: "Similar",
+        answer_3: "Look like",
+        answer_4: "Same",
+        type_of_question: "checkbox"
+    },
+    {   1:1,
+        title_question: "What does IP stand for?",
+        answer_1: "Internet Parking",
+        answer_2: "Internet Protocol",
+        answer_3: "Internet Price",
+        answer_4: "Internet Push",
+        type_of_question: "radio"
+    },
+    {   1:1, 2:2,
+        title_question: "which there are many mountain in Cambodia?",
+        answer_1: "Kratie",
+        answer_2: "Modul Kiri",
+        answer_3: "Ratanakiri",
+        answer_4: "Seim Reap",
+        type_of_question: "checkbox"
     }
-    global_Index += 1;
-    number_Of_Click = global_Index;
+];
+let temperary_Data = []
+let randomQuiz = shuffle(temperary_Data);
+//------------------------------Create The template------------------------------
+var global_Index = 0;
+var total_Score = 0;
+var number_Click = 1;     // prevent for click..........
+var btn1 = false;         // check first click .........
+var btn2 = false;         // check second click.........
+var btn3=  false;         // check third click .........
+var isNotTrue = false;    // check for one click.......
+
+function create_Quiz(parater) {   // Create the quiz by data structur to html..
+    document.querySelector('.container-on-page-quiz').style.display="none";
+    console.log(parater.length);
+    if( global_Index < parater.length-1 && number_Click > 0){       
+        let start = parater[global_Index];             //Create button move question...
+        document.getElementById("question_Add").textContent = start.title_question;
+        document.getElementById("btn-1").textContent ="1. "+start.answer_1;
+        document.getElementById("btn-2").textContent ="2. "+start.answer_2;
+        document.getElementById("btn-3").textContent ="3. "+start.answer_3;
+        document.getElementById("btn-4").textContent ="4. "+start.answer_4;
+        document.getElementById("question_Number").textContent = global_Index+1 +"/"+ (parater.length-1);
+
+        if(start.type_of_question == "checkbox"){
+            document.getElementById("alert").textContent = "There are more than onn correct answer.";
+        }else{document.getElementById("alert").textContent=""};
+        
+        if(global_Index == 0){      
+            var div = document.createElement("div");     
+            div.className = "btn_Move";
+            document.body.appendChild(div);
+
+            var move_btn = document.createElement("button");
+            move_btn.id="move";
+            move_btn.className="blue";
+            move_btn.textContent="Next >";
+            div.appendChild(move_btn);    
+
+            var submith_btn = document.createElement("button");
+            submith_btn.id="submith";
+            submith_btn.className="blue";
+            submith_btn.textContent="Submith >";
+            div.appendChild(submith_btn);
+            submith_btn.style.display="none";
+                                                        // Move the question...
+            move_btn.onclick = function (){create_Quiz(temperary_Data)}
+        }else if(parater.length -2 == global_Index){
+            document.getElementById("move").style.display = "none";
+            document.getElementById("submith").style.display="block";
+                                                        //btn for submith............
+            document.getElementById("submith").onclick = function(){
+            document.getElementsByClassName("quiz_Container")[0].style.display="none";
+            correction()}
+        }
+        color_Change();
+        global_Index += 1;
+        sumScore();
+    }else{
+        alert("Please choose your answer!")
+    }
+}
+
+// ---------------Color Change  Of Button---------------------------------------------------
+function color_Change(){
+    let btn = document.querySelectorAll(".btn");
+    for(let i=0;i<btn.length;i++){
+        btn[i].style.background = "white";
+        btn[i].style.color = "black";
+    }
+    document.getElementById("move").style.background = "white";
+    document.getElementById("move").style.color="black";
+    document.querySelector("#submith").style.background="white";
+    document.querySelector("#submith").style.color="black";
+}
+// ------------Correction display-------------------------------------
+function correction(){
+    sumScore()
+    document.querySelector("#submith").style.display="none";
+    let div = document.createElement("div");
+    div.className="contain_result";      // div of correction...
+    div.id="result";
+    document.body.appendChild(div);
+         // header.......
+    let header =document.createElement("div");
+    header.className = "header";
+    div.appendChild(header);
+    let h1 =document.createElement("h1");
+    h1.textContent="Your Quiz has already completed";
+    header.appendChild(h1);
+        // show score conten....
+    let show_container =document.createElement("div");
+    show_container.className="show";
+    div.appendChild(show_container);
+    let h2 = document.createElement("h2");
+    h2.textContent="Your Result here";
+    show_container.appendChild(h2);
+        // the score -----
+    let score_container =document.createElement("div");
+    score_container.className="total_Score";
+    div.appendChild(score_container);
+    let showScore = document.createElement("h2");
+    showScore.textContent=total_Score +"/" + total_Score*30;
+    showScore.style.color="blue";
+    score_container.appendChild(showScore);
+        ///       get view the result----
+    let text_view =document.createElement("div");
+    text_view.className="show";
+    div.appendChild(text_view);
+    let getView = document.createElement("h2");
+    getView.textContent="To view your correction, Please click on button below.";
+    text_view.appendChild(getView);
+        //button gor got to check correction  ------
+    let correction_contain =document.createElement("div");
+    correction_contain.className="button_Correction";
+    div.appendChild(correction_contain);
+     
+
+    let btn_Correction = document.createElement("button");
+    btn_Correction.id="check_correction";
+    btn_Correction.textContent="< Back";
+    correction_contain.appendChild(btn_Correction);
+
+    btn_Correction.onclick=function(){ 
+        location.reload()
+    }
+}
+// ----------------Sum score-------------------------
+function sumScore(){
+    if(isNotTrue == true){
+        total_Score+=30;
+        isNotTrue = false;
+    }else if(number_Click == 2){
+        if(btn1===btn2 || btn1===btn3 || btn2===btn3){
+            total_Score +=30
+        }
+    }else if(number_Click == 3){
+        if(btn1===btn2===btn3){
+            total_Score+=30;
+        }
+    }else{total_Score+=0;}  
+    number_Click = 0;
+    btn1=false;
+    btn2=false;
+    btn3=false;
 }
 // -----------Create button Click---------------------------------------
 let button_Click = document.getElementsByClassName("btn"); // Get button for click...
 for(let click of button_Click){click.addEventListener("click",getClick);}
 function getClick(event) {   // Click function...........
-    let start = dat_test[global_Index-1];
-    let targets = event.target;
-    for(let i = 0;i<button_Click.length;i++){
-        if(targets.textContent == button_Click[i].textContent){
-            if(i==start[1]){
-                total_Score += 30;
-            }else if(i==start[2]){
-                total_Score += 30;
-            }else if(i==start[3]){
-                total_Score += 30;
+    var targets = event.target;
+    var start = temperary_Data[global_Index-1];
+    if(start.type_of_question == "checkbox"){
+        if(number_Click < 3){
+            for(let i = 0;i < button_Click.length;i++){
+                if(targets.textContent == button_Click[i].textContent){
+                    if(i == start[1]){
+                        btn1 = true;
+                    }else if(i == start[2]){
+                        btn2 = true;
+                    }else if(i == start[3]){
+                        btn3 = true;
+                    }
+                }    
             }
+            
+        }else{
+            alert("It's less than 4.")
         }
+        targets.style.background="blue";
+        targets.style.color="white";
+    }else{
+        if(number_Click == 0){
+            for(let i = 0;i < button_Click.length;i++){
+                if(targets.textContent == button_Click[i].textContent){
+                    isNotTrue=true;
+                    targets.style.background="blue";
+                    targets.style.color="white";
+                }
+            }
+        }else{
+            alert("It has only one answer.");
+        } 
     }
-    document.querySelector("#move").style.background="blue";
+    number_Click =1
+    document.querySelector(".blue").style.background="#32ff7e";
+    document.querySelector(".blue").style.color="white";
 }
-function start_Quiz() {
-    document.getElementsByClassName("btn_Start")[0].style.display = "none";
-    document.getElementsByClassName("quiz_Container")[0].style.display = "block";
-    create_Quiz(dat_test);
-}
-function get_Into_Quiz(){
-    document.getElementsByClassName("container")[0].style.display="none";
-    let div = document.createElement("div");
-    div.className="btn_Start";
-    document.body.appendChild(div);
-    let start_btn=document.createElement("button");
-    start_btn.id="start";
-    start_btn.textContent="START >";
-    div.appendChild(start_btn);
-    document.getElementById("start").style.display="block";
-    document.getElementById("start").onclick = function (){start_Quiz()} //<!--Get start------->
-}
-// -----------Group Button Click-----------------------------------
-// var btn_get_Quiz= document.getElementById("btnQuiz");    //Get into the Quiz....
-// btn_get_Quiz.addEventListener("click",get_Into_Quiz)
+
+
+// -------------------Computing Score----------------------------
+let corrections = document.createElement("div");
+corrections.className = "correction";
+document.body.appendChild(corrections);
+// function correction_View(){
+//     let start = dat_test[global_Index];
+//     let question_View=document.createElement("div");
+//     question_View.id="question_view";
+//     question_View.textContent= global_Index+1+".  "+start.title_question;
+//     corrections.appendChild(question_View);
+
+//     let ans_View1 = document.createElement("div");
+//     ans_View1.className="answer_view";
+//     ans_View1.textContent= "1. "+start.answer_1;
+//     corrections.appendChild(ans_View1);
+
+//     let ans_View2 = document.createElement("div");
+//     ans_View2.className="answer_view";
+//     ans_View2.textContent= "2. "+start.answer_2;
+//     corrections.appendChild(ans_View2);
+
+//     let ans_View3 = document.createElement("div");
+//     ans_View3.className="answer_view";
+//     corrections.appendChild(ans_View3)
+//     ans_View3.textContent= "3. "+start.answer_3;
+
+//     let ans_View4 = document.createElement("div");
+//     ans_View4.className="answer_view";
+//     ans_View4.textContent= "4. "+start.answer_4;
+//     corrections.appendChild(ans_View4);
+   
+// }
 
 // delete all the data from local storage ==========================================
 function removeDataFromLocalStorage(){
@@ -439,8 +589,11 @@ function displayDataStorage(event){
         addDatasToLocalStorage(value, keyOfData)
         keyOfData +=1
     }
+    document.getElementsByClassName("quiz_Container")[0].style.display = "block";
+    temperary_Data = getOneData;
+    console.log(temperary_Data);
+    create_Quiz(temperary_Data)
 }
-
 
 // delete quiz ============================================================
 function deletDataStorage(event){
@@ -461,7 +614,6 @@ function deletDataStorage(event){
     
 }
 
-
 // edit quiz ==============================================================
 function editDataStorage(event){
     let allDataLocalstorage = getAllDataStorage();
@@ -475,20 +627,18 @@ function editDataStorage(event){
         addDatasToLocalStorage(value, keyOfData)
         keyOfData +=1
     }
-    document.querySelector('.container-on-page-quiz').style.display='none';
+    document.querySelector('.container-on-page-quiz').remove();
     addQuestion();
     btnBack.style.display='none';
 }
 
-
-
 //  
 function closePageQuiztoCreateQuestion(){
-    document.querySelector('.container-on-page-quiz').style.display='none';
+    document.querySelector('.container-on-page-quiz').remove();
     addQuestion();
 }
 function closePageQuiztoHomePage(){
-    document.querySelector('.container-on-page-quiz').style.display='none';
+    document.querySelector('.container-on-page-quiz').remove();
     homePage();
 }
 // Quiz menu =====================================================================================================
@@ -601,3 +751,4 @@ let btn_get_Quiz= document.getElementById("btnQuiz");    //Get into the Quiz....
 btn_get_Quiz.addEventListener("click",menuTask);
 
 // console.log(document.body);
+

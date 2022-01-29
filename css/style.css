@@ -264,7 +264,7 @@ li{
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 .question_Title p{
-    font-size: 2.5rem;
+    font-size: 1.6rem;
 }
 
  /* -------------Quiz Motiple Choice----------------------------------------- / / */
@@ -279,7 +279,7 @@ li{
 .answer-Choice .btn{
     width: 40%;
     height: 10vh;
-    font-size: 2rem;
+    font-size: 1.2rem;
     border-radius: 5px;
     margin-top: 30px;
     border: none;
@@ -287,16 +287,19 @@ li{
     border: 1px solid green;
     box-shadow: rgba(138, 139, 241, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
-.answer-Choice .btn:hover{
-    background: #0D08F8;
-    color: #fff;
+.text-alert{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    position: absolute;
+    color: green;
 }
 .btn_Move{
     width: 80%;
     margin: auto;
-    margin-top: 2rem;
+    margin-top: 1.6rem;
     padding: 10px;
-    text-align: center;
+    display: flex; justify-content: center;
 }
 .btn_Move button, .btn_Start button{
     width: 20%;
@@ -427,4 +430,23 @@ li{
 }
 .button-delete-of-card:hover{
     color: red;
+}
+
+
+/* -------------Result Pages----------------------------------- */
+.contain_result{
+    width: 80%;
+    margin: auto;
+    margin-top: 4rem;
+    /* display: none; */
+}
+.header, .show, .total_Score, .button_Correction{
+    display: flex; justify-content: center; align-items: center;
+}
+.button_Correction button{
+    padding: 15px;
+    border: none;
+    background: blue;
+    font-size: 2rem;
+    color: white;
 }
