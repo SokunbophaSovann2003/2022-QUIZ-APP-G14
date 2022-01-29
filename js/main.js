@@ -597,7 +597,7 @@ function displayDataStorage(event){
 
 // delete quiz ============================================================
 function deletDataStorage(event){
-    document.querySelector('.container-on-page-quiz').style.display='none';
+    document.querySelector('.container-on-page-quiz').remove();
     // console.log(document.querySelector('.container-on-page-quiz'));
     let allDataLocalstorage = getAllDataStorage();
     let indexOfData = event.target.parentNode.parentNode.id;
@@ -619,6 +619,7 @@ function editDataStorage(event){
     let allDataLocalstorage = getAllDataStorage();
     let indexOfData = event.target.parentNode.parentNode.id;
     let getOneData = allDataLocalstorage[indexOfData];
+    getOneData.splice(getOneData.length-1, 1);
     allDataLocalstorage.splice(indexOfData, 1);
     removeDataFromLocalStorage();
     data=getOneData;
@@ -629,6 +630,7 @@ function editDataStorage(event){
     }
     document.querySelector('.container-on-page-quiz').remove();
     addQuestion();
+    showTask();
     btnBack.style.display='none';
 }
 
