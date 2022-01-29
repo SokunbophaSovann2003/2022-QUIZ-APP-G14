@@ -5,8 +5,8 @@ var add_question_page = document.querySelector('#add-question-page')
 
 // Call the button for click
 var btnCreateQuestion = document.querySelector("#btnCreate")
-var btnBack = document.querySelector("#btnBack")
-let addQuestion = () =>{
+let btnBack = document.querySelector("#btnBack")
+let addQuestion = (event) =>{
     // Hide the page don't need(home page)
     home_page.style.display = 'none'
     // Show the page add question
@@ -16,7 +16,8 @@ let addQuestion = () =>{
     let create = document.querySelector('.create')
     // Add the listener 
     choose.addEventListener('click',changOption);
-    create.addEventListener('click', getQuestion)
+    create.addEventListener('click', getQuestion);
+    // create.addEventListener('click', );
     btnBack.addEventListener('click', homePage)
     // showTask()
 }
@@ -96,13 +97,15 @@ let data = []
 
 // To add data to local storage
 let saveData = document.querySelector(".btn-save")
+
+
 function addDataToLocalStorage(){
     let quizTitle = document.querySelector(".quiz-title").value
     if (data.length >0 && quizTitle !== "") {
         let title_quiz = {}
         title_quiz["title_quiz"] = quizTitle
         data.push(title_quiz)
-        let data_dictionary = JSON.stringify(data)
+        let data_dictionary = JSON.stringify(data);
         localStorage.setItem('data'+localStorage.length, data_dictionary)
         data = []
         location.reload();
@@ -245,87 +248,87 @@ function editeTask(event){
 
 // ===========================Dispay Quiz========================VeangLy code---
 // ------------------Data structure storage--------------------------------------
-let dat_test= [
-    {1: 1, 2: 3,
-    an: "I lvoe cambodia1111.",
-    answer_1:"Love", answer_2: "Hate", 
-    answer_3: "Fall in", answer_4: "Want date",
-     title_question: "What do you mean?"
-   },
-    {   1: 0, 2: 2, 3:3,
-        title_question: "What do you like?",
-        answer_1: "apple",
-        answer_2: "ice cream",
-        answer_3: "orange",
-        answer_4: "mango",
-    },
-    {   1:3,
-        title_question: "Where do Bopha live?",
-        answer_1: "BTB",
-        answer_2: "RTK",
-        answer_3: "KPC",
-        answer_4: "BMC",
-    },
-    {   1:0,
-        title_question: "Who is Key crush Today?",
-        answer_1: "Liza",
-        answer_2: "Pisey",
-        answer_3: "Yu Ry",
-        answer_4: "Raby",
-        corrected: "Liza",
-    },
-    {   1:2,
-        title_question: "What ...... you do for him?",
-        answer_1: "Would",
-        answer_2: "Will",
-        answer_3: "Will be",
-        answer_4: "Would be",
+// let dat_test= [
+//     {1: 1, 2: 3,
+//     an: "I lvoe cambodia1111.",
+//     answer_1:"Love", answer_2: "Hate", 
+//     answer_3: "Fall in", answer_4: "Want date",
+//      title_question: "What do you mean?"
+//    },
+//     {   1: 0, 2: 2, 3:3,
+//         title_question: "What do you like?",
+//         answer_1: "apple",
+//         answer_2: "ice cream",
+//         answer_3: "orange",
+//         answer_4: "mango",
+//     },
+//     {   1:3,
+//         title_question: "Where do Bopha live?",
+//         answer_1: "BTB",
+//         answer_2: "RTK",
+//         answer_3: "KPC",
+//         answer_4: "BMC",
+//     },
+//     {   1:0,
+//         title_question: "Who is Key crush Today?",
+//         answer_1: "Liza",
+//         answer_2: "Pisey",
+//         answer_3: "Yu Ry",
+//         answer_4: "Raby",
+//         corrected: "Liza",
+//     },
+//     {   1:2,
+//         title_question: "What ...... you do for him?",
+//         answer_1: "Would",
+//         answer_2: "Will",
+//         answer_3: "Will be",
+//         answer_4: "Would be",
         
-    },
-    {   1:0,
-        title_question: "He've......(be) to Cambodia about three time.",
-        answer_1: "been",
-        answer_2: "being",
-        answer_3: "had been",
-        answer_4: "have been",
-    },
-    {   1:3,
-        title_question: "I live ...........Cambodia.",
-        answer_1: "at",
-        answer_2: "on",
-        answer_3: "in",
-        answer_4: "of",
-    },
-    {   1:0,
-        title_question: "Ronal do is the ..... footbaler in the world.",
-        answer_1: "best",
-        answer_2: "good",
-        answer_3: "Well",
-        answer_4: "Exerlenct",
-    },
-    {   1:3,
-        title_question: "Car is ......... than bike.",
-        answer_1: "fastest",
-        answer_2: "fastest than",
-        answer_3: "faster than",
-        answer_4: "faster",
-    },
-    {   1:1,
-        title_question: "What does IP stand for?",
-        answer_1: "Internet Parking",
-        answer_2: "Internet Protocol",
-        answer_3: "Internet Price",
-        answer_4: "Internet Push",
-    },
-    {   1:3,
-        title_question: "Where is the Ankor Wat tample?",
-        answer_1: "Prey Veng",
-        answer_2: "Kep",
-        answer_3: "Siem Reap",
-        answer_4: "Koh Kong",
-    },
-    {title_quiz: "General knowledge"}
-];
+//     },
+//     {   1:0,
+//         title_question: "He've......(be) to Cambodia about three time.",
+//         answer_1: "been",
+//         answer_2: "being",
+//         answer_3: "had been",
+//         answer_4: "have been",
+//     },
+//     {   1:3,
+//         title_question: "I live ...........Cambodia.",
+//         answer_1: "at",
+//         answer_2: "on",
+//         answer_3: "in",
+//         answer_4: "of",
+//     },
+//     {   1:0,
+//         title_question: "Ronal do is the ..... footbaler in the world.",
+//         answer_1: "best",
+//         answer_2: "good",
+//         answer_3: "Well",
+//         answer_4: "Exerlenct",
+//     },
+//     {   1:3,
+//         title_question: "Car is ......... than bike.",
+//         answer_1: "fastest",
+//         answer_2: "fastest than",
+//         answer_3: "faster than",
+//         answer_4: "faster",
+//     },
+//     {   1:1,
+//         title_question: "What does IP stand for?",
+//         answer_1: "Internet Parking",
+//         answer_2: "Internet Protocol",
+//         answer_3: "Internet Price",
+//         answer_4: "Internet Push",
+//     },
+//     {   1:3,
+//         title_question: "Where is the Ankor Wat tample?",
+//         answer_1: "Prey Veng",
+//         answer_2: "Kep",
+//         answer_3: "Siem Reap",
+//         answer_4: "Koh Kong",
+//     },
+//     {title_quiz: "General knowledge"}
+// ];
 
 let randomQuiz = shuffle(dat_test)
 //------------------------------Create The template------------------------------
@@ -396,5 +399,205 @@ function get_Into_Quiz(){
     document.getElementById("start").onclick = function (){start_Quiz()} //<!--Get start------->
 }
 // -----------Group Button Click-----------------------------------
-var btn_get_Quiz= document.getElementById("btnQuiz");    //Get into the Quiz....
-btn_get_Quiz.addEventListener("click",get_Into_Quiz)
+// var btn_get_Quiz= document.getElementById("btnQuiz");    //Get into the Quiz....
+// btn_get_Quiz.addEventListener("click",get_Into_Quiz)
+
+// delete all the data from local storage ==========================================
+function removeDataFromLocalStorage(){
+    localStorage.clear();
+}
+
+
+// take all data storage ============================================================
+function getAllDataStorage(){
+    let forStorAllDataStorage = [];
+    for(i=0; i<localStorage.length; i++){
+        let data = JSON.parse(localStorage["data"+i]);
+        forStorAllDataStorage.push(data);
+    }
+    return forStorAllDataStorage;
+}
+
+
+// add new data to local storage ======================================================
+function addDatasToLocalStorage(v, i){
+    let dataAddToLocal = JSON.stringify(v);
+    localStorage.setItem('data'+i, dataAddToLocal);
+    v = []
+}
+// getAllDataStorage();
+
+// display quiz =========================================================================
+function displayDataStorage(event){
+    let allDataLocalstorage = getAllDataStorage();
+    let indexOfData = event.target.parentNode.id;
+    let getOneData = allDataLocalstorage[indexOfData];
+    removeDataFromLocalStorage();
+    console.log(allDataLocalstorage);
+    let keyOfData = 0;
+    for (let value of allDataLocalstorage){
+        addDatasToLocalStorage(value, keyOfData)
+        keyOfData +=1
+    }
+}
+
+
+// delete quiz ============================================================
+function deletDataStorage(event){
+    document.querySelector('.container-on-page-quiz').style.display='none';
+    // console.log(document.querySelector('.container-on-page-quiz'));
+    let allDataLocalstorage = getAllDataStorage();
+    let indexOfData = event.target.parentNode.parentNode.id;
+    allDataLocalstorage.splice(indexOfData, 1);
+    removeDataFromLocalStorage();
+    let keyOfData = 0
+    for (let value of allDataLocalstorage){
+        addDatasToLocalStorage(value, keyOfData)
+        keyOfData +=1
+    }
+    // location.reload();
+    menuTask();
+    console.log('hello world')
+    
+}
+
+
+// edit quiz ==============================================================
+function editDataStorage(event){
+    let allDataLocalstorage = getAllDataStorage();
+    let indexOfData = event.target.parentNode.parentNode.id;
+    let getOneData = allDataLocalstorage[indexOfData];
+    allDataLocalstorage.splice(indexOfData, 1);
+    removeDataFromLocalStorage();
+    data=getOneData;
+    let keyOfData = 0;
+    for (let value of allDataLocalstorage){
+        addDatasToLocalStorage(value, keyOfData)
+        keyOfData +=1
+    }
+    document.querySelector('.container-on-page-quiz').style.display='none';
+    addQuestion();
+    btnBack.style.display='none';
+}
+
+
+
+//  
+function closePageQuiztoCreateQuestion(){
+    document.querySelector('.container-on-page-quiz').style.display='none';
+    addQuestion();
+}
+function closePageQuiztoHomePage(){
+    document.querySelector('.container-on-page-quiz').style.display='none';
+    homePage();
+}
+// Quiz menu =====================================================================================================
+function menuTask(event){
+    document.querySelector("#home-page").style.display="none";
+
+    // button menu on page display quiz ------------------------------------------------------
+    let container_on_page_quiz = document.createElement('div');
+    container_on_page_quiz.className='container-on-page-quiz';
+    // console.log(container_on_page_quiz);
+
+    let group_of_button = document.createElement('div');
+    group_of_button.className='group-of-button';
+// 
+// 
+// 
+    // back to home page button problem===================================
+// 
+// 
+// 
+    let contain_button_back_to_homepage_on_page_quiz=document.createElement('div');
+    contain_button_back_to_homepage_on_page_quiz.className='contain-button-back-to-homepage';
+    let button_back_to_homepage_on_page_quiz = document.createElement('button');
+    button_back_to_homepage_on_page_quiz.className='back-to-homepage home-page btn-back';
+    button_back_to_homepage_on_page_quiz.id='btnBack';
+    button_back_to_homepage_on_page_quiz.textContent='back';
+    button_back_to_homepage_on_page_quiz.addEventListener('click', closePageQuiztoHomePage)
+    contain_button_back_to_homepage_on_page_quiz.appendChild(button_back_to_homepage_on_page_quiz);
+    group_of_button.appendChild(contain_button_back_to_homepage_on_page_quiz);
+
+    // ===================================================================
+    let contain_button_menu_on_page_quiz = document.createElement('div');
+    contain_button_menu_on_page_quiz.className='contain-button-menu';
+
+    // on page =====================================================
+    let button_menu_quiz_on_page_quiz = document.createElement('button');
+    button_menu_quiz_on_page_quiz.className = 'onpage button-on-page-quiz';
+    button_menu_quiz_on_page_quiz.textContent='Quiz';
+    contain_button_menu_on_page_quiz.appendChild(button_menu_quiz_on_page_quiz);
+
+    // back to create quiz =========================================
+    let button_menu_create_on_page_quiz = document.createElement('button');
+    button_menu_create_on_page_quiz.className='button-on-page-quiz';
+    button_menu_create_on_page_quiz.textContent='Create';
+    button_menu_create_on_page_quiz.addEventListener('click', closePageQuiztoCreateQuestion)
+    contain_button_menu_on_page_quiz.appendChild(button_menu_create_on_page_quiz);
+    group_of_button.appendChild(contain_button_menu_on_page_quiz);
+    container_on_page_quiz.appendChild(group_of_button);
+
+    document.body.appendChild(container_on_page_quiz);
+
+
+
+    // card of menu for display quiz ----------------------------------------------------------
+    let container_quiz_card_on_page_quiz = document.createElement('div');
+    container_quiz_card_on_page_quiz.className='contain-quiz-card';
+
+    for (i=0; i<localStorage.length; i++){
+
+        // get title quiz from local storage ===================================================
+        // var localStorages = localStorage.getItem['data0'];
+        var getting_data_from_localStorage = JSON.parse(localStorage.getItem('data'+i))
+        // console.log(getting_data_from_localStorage);
+
+
+        // create card for user click display =================================================
+        let quiz_card = document.createElement('div');
+        quiz_card.className='quiz-card';
+        quiz_card.id=i;
+        
+        // the place the user click to display ================================================
+        let top = document.createElement('div');
+        top.className='top';
+        top.addEventListener('click', displayDataStorage);
+        top.textContent=getting_data_from_localStorage[getting_data_from_localStorage.length-1]['title_quiz'];
+        console.log(getting_data_from_localStorage.length);
+        console.log(document.getElementsByClassName(i));
+        // the place the have the button the delete the quiz or edit the quiz =================
+        let bottom = document.createElement('div');
+        bottom.className='bottom';
+
+        // place to contain the group of button in the cade ===================================
+        let button_group_of_card = document.createElement('div');
+        button_group_of_card.className='button-group-of-card';
+
+        // create the button for edit the quiz ================================================
+        let button_edit_of_card = document.createElement('button');
+        button_edit_of_card.className='button-edit-of-card button-bottom';
+        button_edit_of_card.textContent='Edit';
+        button_edit_of_card.addEventListener('click', editDataStorage);
+        bottom.appendChild(button_edit_of_card);
+
+        // create the button for delete the quiz from local Storage ============================
+        let button_delete_of_card = document.createElement('button');
+        button_delete_of_card.className='button-delete-of-card button-bottom';
+        button_delete_of_card.textContent='Delete'
+        button_delete_of_card.addEventListener('click', deletDataStorage)
+        bottom.appendChild(button_delete_of_card)
+
+    
+        quiz_card.appendChild(top);
+        quiz_card.appendChild(bottom);
+    
+        container_quiz_card_on_page_quiz.appendChild(quiz_card);
+    }
+    container_on_page_quiz.appendChild(container_quiz_card_on_page_quiz);
+    console.log(container_on_page_quiz);
+}
+let btn_get_Quiz= document.getElementById("btnQuiz");    //Get into the Quiz....
+btn_get_Quiz.addEventListener("click",menuTask);
+
+// console.log(document.body);
