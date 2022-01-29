@@ -81,7 +81,6 @@ let getQuestion = () =>{
         window.alert("Please choose the correct answer!")
     }
     showTask();
-    console.log(data)
 }
 function homePage(){
     // To hide the pages that don't need
@@ -209,7 +208,6 @@ function showTask(){
 function deleteTask(event){
     let pare = event.target;
     let deleteTask = pare.parentNode.id;
-    // console.log(deleteTask);
     data.splice(deleteTask, 1);
     showTask();
 }
@@ -217,7 +215,7 @@ function deleteTask(event){
 // Edite task when user click on button Edite
 function editeTask(event){
     let editQuestion = document.querySelector('.add-question');
-    let editAnswers = document.querySelectorAll('.answer')
+    let editAnswers = document.querySelectorAll('.answer');
     // let selects = document.getElementsByName('answer')
     // let choice = document.querySelector('.choice')
     if (editQuestion.value == "" && editAnswers[0].value == "" && editAnswers[1].value == ""&& editAnswers[1].value == ""&& editAnswers[3].value == ""){
@@ -328,13 +326,15 @@ let dat_test= [
         answer_3: "Ratanakiri",
         answer_4: "Seim Reap",
         type_of_question: "checkbox"
-    }
+    },
+    {title_quiz: "General Knowledge"}
 ];
-let temperary_Data = []
-let randomQuiz = shuffle(temperary_Data);
+let randomQuiz = shuffle(dat_test);
+localStorage.setItem("data0",JSON.stringify(randomQuiz))
 //------------------------------Create The template------------------------------
 var global_Index = 0;
 var total_Score = 0;
+var allScores = 0;
 var number_Click = 1;     // prevent for click..........
 var btn1 = false;         // check first click .........
 var btn2 = false;         // check second click.........
@@ -343,7 +343,6 @@ var isNotTrue = false;    // check for one click.......
 
 function create_Quiz(parater) {   // Create the quiz by data structur to html..
     document.querySelector('.container-on-page-quiz').style.display="none";
-    console.log(parater.length);
     if( global_Index < parater.length-1 && number_Click > 0){       
         let start = parater[global_Index];             //Create button move question...
         document.getElementById("question_Add").textContent = start.title_question;
@@ -431,7 +430,7 @@ function correction(){
     score_container.className="total_Score";
     div.appendChild(score_container);
     let showScore = document.createElement("h2");
-    showScore.textContent=total_Score +"/" + total_Score*30;
+    showScore.textContent=total_Score +"/" + (allScores-1);
     showScore.style.color="blue";
     score_container.appendChild(showScore);
         ///       get view the result----
@@ -445,7 +444,6 @@ function correction(){
     let correction_contain =document.createElement("div");
     correction_contain.className="button_Correction";
     div.appendChild(correction_contain);
-     
 
     let btn_Correction = document.createElement("button");
     btn_Correction.id="check_correction";
@@ -459,21 +457,22 @@ function correction(){
 // ----------------Sum score-------------------------
 function sumScore(){
     if(isNotTrue == true){
-        total_Score+=30;
+        total_Score+=1;
         isNotTrue = false;
     }else if(number_Click == 2){
         if(btn1===btn2 || btn1===btn3 || btn2===btn3){
-            total_Score +=30
+            total_Score +=1
         }
     }else if(number_Click == 3){
         if(btn1===btn2===btn3){
-            total_Score+=30;
+            total_Score+=1;
         }
     }else{total_Score+=0;}  
     number_Click = 0;
     btn1=false;
     btn2=false;
     btn3=false;
+    allScores += 1
 }
 // -----------Create button Click---------------------------------------
 let button_Click = document.getElementsByClassName("btn"); // Get button for click...
@@ -583,7 +582,6 @@ function displayDataStorage(event){
     let indexOfData = event.target.parentNode.id;
     let getOneData = allDataLocalstorage[indexOfData];
     removeDataFromLocalStorage();
-    console.log(allDataLocalstorage);
     let keyOfData = 0;
     for (let value of allDataLocalstorage){
         addDatasToLocalStorage(value, keyOfData)
@@ -591,14 +589,12 @@ function displayDataStorage(event){
     }
     document.getElementsByClassName("quiz_Container")[0].style.display = "block";
     temperary_Data = getOneData;
-    console.log(temperary_Data);
     create_Quiz(temperary_Data)
 }
 
 // delete quiz ============================================================
 function deletDataStorage(event){
     document.querySelector('.container-on-page-quiz').remove();
-    // console.log(document.querySelector('.container-on-page-quiz'));
     let allDataLocalstorage = getAllDataStorage();
     let indexOfData = event.target.parentNode.parentNode.id;
     allDataLocalstorage.splice(indexOfData, 1);
@@ -610,7 +606,6 @@ function deletDataStorage(event){
     }
     // location.reload();
     menuTask();
-    console.log('hello world')
     
 }
 
@@ -650,7 +645,6 @@ function menuTask(event){
     // button menu on page display quiz ------------------------------------------------------
     let container_on_page_quiz = document.createElement('div');
     container_on_page_quiz.className='container-on-page-quiz';
-    // console.log(container_on_page_quiz);
 
     let group_of_button = document.createElement('div');
     group_of_button.className='group-of-button';
@@ -689,7 +683,6 @@ function menuTask(event){
     contain_button_menu_on_page_quiz.appendChild(button_menu_create_on_page_quiz);
     group_of_button.appendChild(contain_button_menu_on_page_quiz);
     container_on_page_quiz.appendChild(group_of_button);
-
     document.body.appendChild(container_on_page_quiz);
 
 
@@ -703,7 +696,6 @@ function menuTask(event){
         // get title quiz from local storage ===================================================
         // var localStorages = localStorage.getItem['data0'];
         var getting_data_from_localStorage = JSON.parse(localStorage.getItem('data'+i))
-        // console.log(getting_data_from_localStorage);
 
 
         // create card for user click display =================================================
@@ -716,8 +708,6 @@ function menuTask(event){
         top.className='top';
         top.addEventListener('click', displayDataStorage);
         top.textContent=getting_data_from_localStorage[getting_data_from_localStorage.length-1]['title_quiz'];
-        console.log(getting_data_from_localStorage.length);
-        console.log(document.getElementsByClassName(i));
         // the place the have the button the delete the quiz or edit the quiz =================
         let bottom = document.createElement('div');
         bottom.className='bottom';
@@ -747,10 +737,7 @@ function menuTask(event){
         container_quiz_card_on_page_quiz.appendChild(quiz_card);
     }
     container_on_page_quiz.appendChild(container_quiz_card_on_page_quiz);
-    console.log(container_on_page_quiz);
 }
 let btn_get_Quiz= document.getElementById("btnQuiz");    //Get into the Quiz....
 btn_get_Quiz.addEventListener("click",menuTask);
-
-// console.log(document.body);
 
